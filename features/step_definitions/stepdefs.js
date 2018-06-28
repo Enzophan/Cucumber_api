@@ -13,7 +13,18 @@ function isItFriday(today) {
     // We'll leave the implementation blank for now
 }
 
-
+var options = {
+    method: 'POST',
+    uri: 'https://dispatch.beta.qup.vn/oauth/token',
+    body: {
+        "grant_type": "password",
+        "username": "hoangdinh90",
+        "password": "demo@123",
+        "client_id": "migratecard",
+        "client_secret": "56665948e248b18b3b95b011"
+    },
+    json: true // Automatically stringifies the body to JSON
+};
 
 
 
@@ -26,27 +37,15 @@ Given('today is Sunday', function () {
 
 Given('Get token when login account 3rd', function () {
     var self = this;
-    var options = {
-        method: 'POST',
-        uri: 'https://dispatch.beta.qup.vn/oauth/token',
-        body: {
-            "grant_type": "password",
-            "username": "hoangdinh90",
-            "password": "demo@123",
-            "client_id": "migratecard",
-            "client_secret": "56665948e248b18b3b95b011"
-        },
-        json: true // Automatically stringifies the body to JSON
-    };
-    request(options)
-        .then(function (parsedBody){
-            console.log (parsedBody);
-            console.log(parsedBody.access_token);
-            self.token = _.get(parsedBody.access_toke);
-            done();
+    return request(options)
+        .then(function (parsedBody) {
+            // console.log(parsedBody);
+            console.log("parsedBody.access_token:", parsedBody.access_token);
+            self.token = _.get(parsedBody, ["access_token"], "");
+            return;
         })
         .catch(function (err) {
-            
+            console.log (err);
         });
 
 })
@@ -84,12 +83,14 @@ When('I ask whether it\'s Friday yet', function () {
 
 When('I request booking from API', function () {
     var self = this;
+    console.log("token:" + self.token);
+
     var booking = {
         method: 'POST',
         uri: 'https://dispatch.beta.qup.vn/api/v2/agent/booking/create',
         headers: {
             'content-type': 'application/json',
-            'authorization': 'Bearer 34b7a9d37b863832a6c9cc9a4b792d27967b23f0'
+            'authorization': 'Bearer ' + self.token
         },
         body: {
 
@@ -150,10 +151,14 @@ When('I request booking from API', function () {
         json: true // Automatically parses the JSON string in the response
     };
 
-    request(booking)
+    return request(booking)
         .then(function (response) {
             console.log(response);
-            console.log(response.bookId);
+            console.log(response.response.bookId);
+            self.code = response.response.code;
+            self.bookId = response.response.bookId;
+            console.log(self.code)
+            return;
         })
         .catch(function (err) {
 
@@ -162,6 +167,18 @@ When('I request booking from API', function () {
 
 })
 
+
+Then('Booking create successful', function () {
+    // Write code here that turns the phrase above into concrete actions
+    var self = this;
+    console.log("Code: " + self.code);
+    if (self.code == true) {
+        console.log("Booking successful: " + self.bookId);
+    }else {
+        console.log("Booking Failed");
+
+    }
+});
 
 Then('I should be told {string}', function (expectedAnswer) {
     // Write code here that turns the phrase above into concrete actions

@@ -9,4 +9,4 @@ Everybody wants to know when it's Friday
     Scenario: Login api
         Given Get token when login account 3rd
         When I request booking from API
-        Then I should be told "Nope"
+        Then Booking create successful
