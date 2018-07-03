@@ -35,6 +35,23 @@ Given('today is Sunday', function () {
 
 });
 
+Given('The MongoDb is Connected', function () {
+    return;
+    // var self = this;
+    // if (this.mongoose.connection.readyState == 1) {
+    //     self.db = self.mongoose.connection;
+    //     console.log("MongoDB has been connected: " + self.db);
+    // }
+    // this.mongoose.connect(this.mongoHost, function (error, db) {
+    //     if (error) callback(error)
+    //     else {
+    //         self.db = self.mongoose.connection;
+    //         console.log("MongoDB has been connected");
+    //     }
+    // })
+    
+})
+
 Given('Get token when login account 3rd', function () {
     var self = this;
     return request(options)
@@ -178,6 +195,21 @@ Then('Booking create successful', function () {
         console.log("Booking Failed");
 
     }
+});
+
+
+Then('I should have {string} document in database with below info', function (collection) {
+    var self = this;
+   
+    var query = {};
+    console.log("query ", JSON.stringify(query, null, 3));
+    return Promise.promisify(self.db.collection(collection).find, { 
+            context: self.db.collection(collection)
+        })(query)
+        .then(function (foundDocs) {
+            console.log("foundDocs", foundDocs)
+            return;
+        })
 });
 
 Then('I should be told {string}', function (expectedAnswer) {
