@@ -1,5 +1,6 @@
 // var assert = require('assert');
 var assert = require('chai').assert;
+var { expect } = require('chai');
 var { Given, When, Then, setDefaultTimeout } = require('cucumber');
 var Promise = require('bluebird');
 var _ = require('lodash');
@@ -191,8 +192,8 @@ When('I request booking from API when custom data', function (table) {
 
     return request(booking)
         .then(function (response) {
-            console.log(response);
-            console.log(response.response.bookId);
+            console.log("Response After request :" + response);
+            console.log("Booking ID After request :" + response.response.bookId);
             self.code = response.response.code;
             self.bookId = response.response.bookId;
             console.log(self.code)
@@ -200,7 +201,11 @@ When('I request booking from API when custom data', function (table) {
         })
         .catch(function (err) {
 
-            console.log(err);
+            console.log("Error After request :" + err);
+
+            self.errorResponse = err;
+
+
         });
 
 });
@@ -286,7 +291,7 @@ When('Find booking from {string} have phone number and request cancel that booki
         .then(function (foundDocs) {
             // Array 
             var newFoundDocs = foundDocs.map(function (doc) { return doc.bookId });
-            console.log(newFoundDocs);
+            // console.log(newFoundDocs);
             self.bookIds = newFoundDocs;
             console.log(self.bookIds);
             // console.log("Find Booking :" + foundDocs.bookId)
@@ -326,20 +331,36 @@ Then('Booking cancelled successful', function () {
     return;
 });
 
+
+Then('I should get an error object in returned data with errorCode {string}', function (statusCode, table) {
+    // Write code here that turns the phrase above into concrete actions
+    var self = this;
+    console.log("Self.errorResponse :" + JSON.stringify(self.errorResponse));
+    assert.equal(self.errorResponse.statusCode, statusCode);
+    var expectedData = JSON.parse(table.hashes()[0].res);
+    console.log("expectedData :", JSON.stringify(expectedData));
+    console.log("Self.errorResponse.error : ", JSON.stringify(self.errorResponse.error));
+    assert.equal(JSON.stringify(self.errorResponse.error), JSON.stringify(expectedData), "Result object is not matched with the expected one");
+    return;
+});
+
 Then('I should have {string} document in database with below info', function (collection, table) {
     var self = this;
     // [{total: 1, specifiedInfo: '{"request.note":"Auto test api"}'}]
-    var query = JSON.parse(table.hashes()[0].specifiedInfo);
+    var specifiedInfo = JSON.parse(table.hashes()[0].specifiedInfo);
+    var query = { "bookId": self.bookId };
     console.log("query ", JSON.stringify(query, null, 3));
     return Promise.promisify(self.db.collection(collection).find, {
         context: self.db.collection(collection)
     })(query)
         .then(function (foundDocs) {
-            assert.equal(foundDocs.length, table.hashes()[0].total, "The number of documents which inserted by API is not correctly");
-            console.log("Booking ID :", foundDocs.bookId);
+            console.log("Expected Data : " + JSON.stringify(specifiedInfo));
+            console.log("Query Data : " + JSON.stringify(foundDocs));
+            assert.isTrue(self.matchData(foundDocs, specifiedInfo), "Failed: The data of document which inserted by API is not correctly");
             return;
         }).catch(function (err) {
             console.log(err);
+            throw err;
         });
 });
 
@@ -357,7 +378,6 @@ Then('I should have {string} document in database with {string} Booking ID', fun
             assert.equal(foundDocs.length, total, "The number of documents which inserted by API is not correctly")
             var myJSON = JSON.stringify(foundDocs);
             console.log(myJSON);
-            console.log("Booking ID :", foundDocs.bookId);
             return;
         }).catch(function (err) {
             console.log(err);
