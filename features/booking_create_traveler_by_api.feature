@@ -1,4 +1,4 @@
-Feature: Request Booking from API
+Feature: Request Booking from API when customer is traveler
 Everybody wants to know when customer is traveler
 
 # Note

@@ -1,4 +1,4 @@
-Feature: Request Booking from API
+Feature: Request Booking from API when customer is New traveler
     Everybody wants to know when customer is New traveler
 
     Scenario: 1. Request Booking by API with Booking Type = 0 & "paymentType" = 2 & New Traveler

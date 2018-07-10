@@ -1,4 +1,4 @@
-Feature: Request Booking from API
+Feature: Request Booking from API when customer is personal
     Everybody wants to know when customer is personal
 
     Scenario: 1. Request Booking by API with Booking type = 0 & "paymentType" = 1

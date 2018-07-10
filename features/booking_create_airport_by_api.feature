@@ -1,4 +1,4 @@
-Feature: Request Booking from API
+Feature: Request Booking from API when request booking is from/to Airport
     Everybody wants to know when customer request booking is from/to Airport
 
     Scenario: 1. Request Booking by API with Booking "type" = 0 & "paymentType" = 1 (From Airport)
