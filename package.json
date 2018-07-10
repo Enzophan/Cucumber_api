@@ -13,7 +13,8 @@
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "cucumber": "^4.2.1"
+    "cucumber": "^4.2.1",
+    "cucumber-html-reporter": "^4.0.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

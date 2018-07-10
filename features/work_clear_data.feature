@@ -12,3 +12,8 @@ Feature: Cancel Booking from API
 
 
 
+# Scenario: 1. Request Booking by API
+#     Given Get token when login account 3rd
+#     When I request booking from API
+#     Then Booking create successful
+#     And I should have "Booking" document in database with "1" Booking ID

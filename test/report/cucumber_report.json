@@ -1,0 +1,583 @@
+[
+  {
+    "description": "Everybody wants to know when customer is traveler",
+    "keyword": "Feature",
+    "name": "Request Booking from API",
+    "line": 1,
+    "id": "request-booking-from-api",
+    "tags": [],
+    "uri": "features\\booking_create_traveler_by_api.feature",
+    "elements": [
+      {
+        "id": "request-booking-from-api;1.-request-booking-by-api-with-booking-type-=-0-&-\"paymenttype\"-=-1",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "1. Request Booking by API with Booking Type = 0 & \"paymentType\" = 1",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 9,
+            "name": "Get token when login Account 3rd from \"local\"",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "requestBody"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "{ \"psgInfo\": { \"phone\": \"+12063336666\", \"firstName\": \"Auto Test\", \"lastName\": \"Demo 123\", \"email\": \"tester.qup@gmail.com\" }, \"request\": { \"pickup\": { \"address\": \"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\", \"geo\": [108.222198, 16.075792], \"timezone\": \"Asia/Saigon\" }, \"destination\": { \"address\": \"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\", \"geo\": [108.266139, 16.007381], \"timezone\": \"Asia/Saigon\" }, \"pickUpTime\": \"Now\", \"vehicleTypeRequest\": \"Bike\", \"type\": 0, \"paymentType\": 1, \"note\": \"Auto test api\", \"promo\": \"\", \"rideSharing\": false, \"tip\": 13, \"packageRateId\": \"5b3d8590e4b0edd700de78cf\" }, \"dispatch3rd\": false, \"corporateInfo\": { \"division\": \"test\", \"managerEmail\": \"test@gmail.com\", \"corpId\": \"123\", \"managerName\": \"\", \"costCentre\": \"\", \"department\": \"\", \"corporateId\": \"5b3d86a2e4b0edd700de78d5\", \"clientCaseMatter\": \"\", \"chargeCode\": \"\" } }"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I request booking from API when custom data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:175"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 479000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "Booking create successful",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:309"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "I should have \"Booking\" document in database with \"1\" Booking ID",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:384"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "specifiedInfo"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "[{\"platform\":\"API\",\"bookFrom\":\"API\",\"travelerType\":1,\"fleetId\":\"hoanglocal\",\"fleetName\":\"Hoang Fleet\",\"reservation\":false,\"pricingType\":0,\"currencyISO\":\"VND\",\"currencySymbol\":\"đ\",\"dispatch3rd\":false,\"request\":{ \"pickUpTime\":\"Now\",\"vehicleTypeRequest\":\"Bike\",\"promo\":\"\",\"rideSharing\":false,\"tip\":0,\"psgFleetId\":\"hoanglocal\",\"serviceActive\":false,\"paymentType\":1,\"type\":0,\"hourly\":0,\"moreInfo\":{\"flightInfo\":{\"type\":-1,\"flightNumber\":\"\",\"airline\":\"\"}},\"operatorNote\":\"\",\"note\":\"Auto test api\",\"vehicleType\":[\"Bike\"],\"destination\":{\"businessName\":\"\",\"zipCode\":\"\",\"geo\":[108.266139,16.007381],\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"address\":\"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\"},\"pickup\":{\"address\":\"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\",\"businessName\":\"\",\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"zipCode\":\"\",\"geo\":[108.222198,16.075792]},\"services\":[],\"typeRate\":0},\"bookingRideSharing\":[],\"dispatchRideSharing\":false,\"corporateInfo\":{\"division\":\"test\",\"managerEmail\":\"test@gmail.com\",\"corpId\":\"123\",\"managerName\":\"\",\"costCentre\":\"\",\"department\":\"\",\"corporateId\":\"5b3d86a2e4b0edd700de78d5\",\"clientCaseMatter\":\"\",\"chargeCode\":\"\"},\"psgInfo\":{\"firstName\":\"Auto Test\",\"lastName\":\"Demo 123\",\"email\":\"tester.qup@gmail.com\",\"phone\":\"+12063336666\",\"fullName\":\"Auto Test Demo 123\",\"rank\":0},\"dispatchType\":0}]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I should have \"Booking\" document in database with below expected data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "request-booking-from-api;2.-request-booking-by-api-with-booking-type-=-0-&-\"paymenttype\"-=-2",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "2. Request Booking by API with Booking Type = 0 & \"paymentType\" = 2",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "Get token when login Account 3rd from \"local\"",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 33000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "requestBody"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "{ \"psgInfo\": { \"phone\": \"+12063336666\", \"firstName\": \"Auto Test\", \"lastName\": \"Demo 123\", \"email\": \"tester.qup@gmail.com\", \"creditInfo\": { \"cardNumber\": \"5555555555554444\", \"cardHolder\": \"Auto\", \"postalCode\": \"98789\", \"expiredDate\": \"12/2022\", \"cvv\": \"123\" } }, \"request\": { \"pickup\": { \"address\": \"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\", \"geo\": [108.222198, 16.075792], \"timezone\": \"Asia/Saigon\" }, \"destination\": { \"address\": \"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\", \"geo\": [108.266139, 16.007381], \"timezone\": \"Asia/Saigon\" }, \"pickUpTime\": \"Now\", \"vehicleTypeRequest\": \"Bike\", \"type\": 0, \"paymentType\": 2, \"note\": \"Auto test api\", \"promo\": \"\", \"rideSharing\": false, \"tip\": 13, \"packageRateId\": \"5b3d8590e4b0edd700de78cf\" }, \"dispatch3rd\": false, \"corporateInfo\": { \"division\": \"test\", \"managerEmail\": \"test@gmail.com\", \"corpId\": \"123\", \"managerName\": \"\", \"costCentre\": \"\", \"department\": \"\", \"corporateId\": \"5b3d86a2e4b0edd700de78d5\", \"clientCaseMatter\": \"\", \"chargeCode\": \"\" } }"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 21,
+            "name": "I request booking from API when custom data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:175"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2205000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 24,
+            "name": "Booking create successful",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:309"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "I should have \"Booking\" document in database with \"1\" Booking ID",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:384"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "specifiedInfo"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "[{\"platform\":\"API\",\"bookFrom\":\"API\",\"travelerType\":1,\"fleetId\":\"hoanglocal\",\"fleetName\":\"Hoang Fleet\",\"reservation\":false,\"pricingType\":0,\"currencyISO\":\"VND\",\"currencySymbol\":\"đ\",\"dispatch3rd\":false,\"request\":{ \"pickUpTime\":\"Now\",\"vehicleTypeRequest\":\"Bike\",\"promo\":\"\",\"rideSharing\":false,\"tip\":0,\"psgFleetId\":\"hoanglocal\",\"serviceActive\":false,\"paymentType\":2,\"type\":0,\"hourly\":0,\"moreInfo\":{\"flightInfo\":{\"type\":-1,\"flightNumber\":\"\",\"airline\":\"\"}},\"operatorNote\":\"\",\"note\":\"Auto test api\",\"vehicleType\":[\"Bike\"],\"destination\":{\"businessName\":\"\",\"zipCode\":\"\",\"geo\":[108.266139,16.007381],\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"address\":\"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\"},\"pickup\":{\"address\":\"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\",\"businessName\":\"\",\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"zipCode\":\"\",\"geo\":[108.222198,16.075792]},\"services\":[],\"typeRate\":0},\"bookingRideSharing\":[],\"dispatchRideSharing\":false,\"corporateInfo\":{\"division\":\"test\",\"managerEmail\":\"test@gmail.com\",\"corpId\":\"123\",\"managerName\":\"\",\"costCentre\":\"\",\"department\":\"\",\"corporateId\":\"5b3d86a2e4b0edd700de78d5\",\"clientCaseMatter\":\"\",\"chargeCode\":\"\"},\"psgInfo\":{\"firstName\":\"Auto Test\",\"lastName\":\"Demo 123\",\"email\":\"tester.qup@gmail.com\",\"phone\":\"+12063336666\",\"fullName\":\"Auto Test Demo 123\",\"creditInfo\":{\"cardMask\":\"XXXXXXXXXXXX4444\",\"gateway\":\"Stripe\"},\"rank\":0},\"dispatchType\":0}]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 26,
+            "name": "I should have \"Booking\" document in database with below expected data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 19000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "request-booking-from-api;3.-request-booking-by-api-with-booking-type-=-0-&-\"paymenttype\"-=-2-(from-airport)",
+        "keyword": "Scenario",
+        "line": 31,
+        "name": "3. Request Booking by API with Booking Type = 0 & \"paymentType\" = 2 (From Airport)",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 32,
+            "name": "Get token when login Account 3rd from \"local\"",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "requestBody"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "{ \"psgInfo\": { \"phone\": \"+12063336666\", \"firstName\": \"Auto Test\", \"lastName\": \"Demo 123\", \"email\": \"tester.qup@gmail.com\", \"creditInfo\": { \"cardNumber\": \"5555555555554444\", \"cardHolder\": \"Auto\", \"postalCode\": \"98789\", \"expiredDate\": \"12/2022\", \"cvv\": \"123\" } }, \"request\": { \"pickup\": { \"address\": \"Cảng Hàng Không Quốc Tế Đà Nẵng, Duy Tân, Hải Châu, Đà Nẵng\", \"geo\": [108.201338, 16.055583], \"timezone\": \"Asia/Saigon\" }, \"destination\": { \"address\": \"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\", \"geo\": [108.266139, 16.007381], \"timezone\": \"Asia/Saigon\" }, \"pickUpTime\": \"Now\", \"vehicleTypeRequest\": \"Bike\", \"type\": 0, \"paymentType\": 2, \"note\": \"Auto test api\", \"promo\": \"\", \"rideSharing\": false, \"tip\": 13, \"packageRateId\": \"5b3d8590e4b0edd700de78cf\" }, \"dispatch3rd\": false, \"corporateInfo\": { \"division\": \"test\", \"managerEmail\": \"test@gmail.com\", \"corpId\": \"123\", \"managerName\": \"\", \"costCentre\": \"\", \"department\": \"\", \"corporateId\": \"5b3d86a2e4b0edd700de78d5\", \"clientCaseMatter\": \"\", \"chargeCode\": \"\" } }"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 33,
+            "name": "I request booking from API when custom data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:175"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1670000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 36,
+            "name": "Booking create successful",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:309"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 37,
+            "name": "I should have \"Booking\" document in database with \"1\" Booking ID",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:384"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "request-booking-from-api;4.-request-booking-by-api-with-booking-type-=-0-&-\"paymenttype\"-=-2-(to-airport)",
+        "keyword": "Scenario",
+        "line": 39,
+        "name": "4. Request Booking by API with Booking Type = 0 & \"paymentType\" = 2 (To Airport)",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 40,
+            "name": "Get token when login Account 3rd from \"local\"",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "requestBody"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "{ \"psgInfo\": { \"phone\": \"+12063336666\", \"firstName\": \"Auto Test\", \"lastName\": \"Demo 123\", \"email\": \"tester.qup@gmail.com\", \"creditInfo\": { \"cardNumber\": \"5555555555554444\", \"cardHolder\": \"Auto\", \"postalCode\": \"98789\", \"expiredDate\": \"12/2022\", \"cvv\": \"123\" } }, \"request\": { \"pickup\": { \"address\": \"Cocobay Da Nang, Vietnam, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\", \"geo\": [108.284512, 15.966895], \"timezone\": \"Asia/Saigon\" }, \"destination\": { \"address\": \"Da Nang International Airport, Duy Tân, Hải Châu, Đà Nẵng\", \"geo\": [108.201381, 16.055624], \"timezone\": \"Asia/Saigon\" }, \"pickUpTime\": \"2018-07-15 12:12\", \"vehicleTypeRequest\": \"Bike\", \"type\": 0, \"paymentType\": 2, \"note\": \"Auto test api\", \"promo\": \"\", \"rideSharing\": false, \"tip\": 13, \"packageRateId\": \"5b3d8590e4b0edd700de78cf\" }, \"dispatch3rd\": false, \"corporateInfo\": { \"division\": \"test\", \"managerEmail\": \"test@gmail.com\", \"corpId\": \"123\", \"managerName\": \"\", \"costCentre\": \"\", \"department\": \"\", \"corporateId\": \"5b3d86a2e4b0edd700de78d5\", \"clientCaseMatter\": \"\", \"chargeCode\": \"\" } }"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 41,
+            "name": "I request booking from API when custom data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:175"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1578000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 44,
+            "name": "Booking create successful",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:309"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 45,
+            "name": "I should have \"Booking\" document in database with \"1\" Booking ID",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:384"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "request-booking-from-api;5.-request-booking-by-api-with-booking-type-=-0-&-\"paymenttype\"-=-5",
+        "keyword": "Scenario",
+        "line": 47,
+        "name": "5. Request Booking by API with Booking Type = 0 & \"paymentType\" = 5",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 48,
+            "name": "Get token when login Account 3rd from \"local\"",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 57000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "requestBody"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "{ \"psgInfo\": { \"phone\": \"+12063336666\", \"firstName\": \"Auto Test\", \"lastName\": \"Demo 123\", \"email\": \"tester.qup@gmail.com\"}, \"request\": { \"pickup\": { \"address\": \"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\", \"geo\": [108.222198, 16.075792], \"timezone\": \"Asia/Saigon\" }, \"destination\": { \"address\": \"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\", \"geo\": [108.266139, 16.007381], \"timezone\": \"Asia/Saigon\" }, \"pickUpTime\": \"Now\", \"vehicleTypeRequest\": \"Bike\", \"type\": 0, \"paymentType\": 5, \"note\": \"Auto test api\", \"promo\": \"\", \"rideSharing\": false, \"tip\": 13, \"packageRateId\": \"5b3d8590e4b0edd700de78cf\" }, \"dispatch3rd\": false, \"corporateInfo\": { \"division\": \"test\", \"managerEmail\": \"test@gmail.com\", \"corpId\": \"123\", \"managerName\": \"\", \"costCentre\": \"\", \"department\": \"\", \"corporateId\": \"5b3d86a2e4b0edd700de78d5\", \"clientCaseMatter\": \"\", \"chargeCode\": \"\" } }"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 49,
+            "name": "I request booking from API when custom data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:175"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 452000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 52,
+            "name": "Booking create successful",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:309"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 53,
+            "name": "I should have \"Booking\" document in database with \"1\" Booking ID",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:384"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 36000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "specifiedInfo"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "[{\"platform\":\"API\",\"bookFrom\":\"API\",\"travelerType\":1,\"fleetId\":\"hoanglocal\",\"fleetName\":\"Hoang Fleet\",\"reservation\":false,\"pricingType\":0,\"currencyISO\":\"VND\",\"currencySymbol\":\"đ\",\"dispatch3rd\":false,\"request\":{ \"pickUpTime\":\"Now\",\"vehicleTypeRequest\":\"Bike\",\"promo\":\"\",\"rideSharing\":false,\"tip\":0,\"psgFleetId\":\"hoanglocal\",\"serviceActive\":false,\"paymentType\":5,\"type\":0,\"hourly\":0,\"moreInfo\":{\"flightInfo\":{\"type\":-1,\"flightNumber\":\"\",\"airline\":\"\"}},\"operatorNote\":\"\",\"note\":\"Auto test api\",\"vehicleType\":[\"Bike\"],\"destination\":{\"businessName\":\"\",\"zipCode\":\"\",\"geo\":[108.266139,16.007381],\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"address\":\"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\"},\"pickup\":{\"address\":\"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\",\"businessName\":\"\",\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"zipCode\":\"\",\"geo\":[108.222198,16.075792]},\"services\":[],\"typeRate\":0},\"bookingRideSharing\":[],\"dispatchRideSharing\":false,\"corporateInfo\":{\"division\":\"test\",\"managerEmail\":\"test@gmail.com\",\"corpId\":\"123\",\"managerName\":\"\",\"costCentre\":\"\",\"department\":\"\",\"corporateId\":\"5b3d86a2e4b0edd700de78d5\",\"clientCaseMatter\":\"\",\"chargeCode\":\"\"},\"psgInfo\":{\"firstName\":\"Auto Test\",\"lastName\":\"Demo 123\",\"email\":\"tester.qup@gmail.com\",\"phone\":\"+12063336666\",\"fullName\":\"Auto Test Demo 123\",\"rank\":0},\"dispatchType\":0}]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 54,
+            "name": "I should have \"Booking\" document in database with below expected data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "request-booking-from-api;6.-request-booking-by-api-with-booking-type-=-0-&-\"paymenttype\"-=-6",
+        "keyword": "Scenario",
+        "line": 59,
+        "name": "6. Request Booking by API with Booking Type = 0 & \"paymentType\" = 6",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 60,
+            "name": "Get token when login Account 3rd from \"local\"",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 98000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "requestBody"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "{ \"psgInfo\": { \"phone\": \"+12063336666\", \"firstName\": \"Auto Test\", \"lastName\": \"Demo 123\", \"email\": \"tester.qup@gmail.com\"}, \"request\": { \"pickup\": { \"address\": \"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\", \"geo\": [108.222198, 16.075792], \"timezone\": \"Asia/Saigon\" }, \"destination\": { \"address\": \"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\", \"geo\": [108.266139, 16.007381], \"timezone\": \"Asia/Saigon\" }, \"pickUpTime\": \"Now\", \"vehicleTypeRequest\": \"Bike\", \"type\": 0, \"paymentType\": 6, \"note\": \"Auto test api\", \"promo\": \"\", \"rideSharing\": false, \"tip\": 13, \"packageRateId\": \"5b3d8590e4b0edd700de78cf\" }, \"dispatch3rd\": false, \"corporateInfo\": { \"division\": \"test\", \"managerEmail\": \"test@gmail.com\", \"corpId\": \"123\", \"managerName\": \"\", \"costCentre\": \"\", \"department\": \"\", \"corporateId\": \"5b3d86a2e4b0edd700de78d5\", \"clientCaseMatter\": \"\", \"chargeCode\": \"\" } }"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 61,
+            "name": "I request booking from API when custom data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:175"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 367000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 64,
+            "name": "Booking create successful",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:309"
+            },
+            "result": {
+              "status": "passed"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 65,
+            "name": "I should have \"Booking\" document in database with \"1\" Booking ID",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:384"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10000000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "specifiedInfo"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "[{\"platform\":\"API\",\"bookFrom\":\"API\",\"travelerType\":1,\"fleetId\":\"hoanglocal\",\"fleetName\":\"Hoang Fleet\",\"reservation\":false,\"pricingType\":0,\"currencyISO\":\"VND\",\"currencySymbol\":\"đ\",\"dispatch3rd\":false,\"request\":{ \"pickUpTime\":\"Now\",\"vehicleTypeRequest\":\"Bike\",\"promo\":\"\",\"rideSharing\":false,\"tip\":0,\"psgFleetId\":\"hoanglocal\",\"serviceActive\":false,\"paymentType\":6,\"type\":0,\"hourly\":0,\"moreInfo\":{\"flightInfo\":{\"type\":-1,\"flightNumber\":\"\",\"airline\":\"\"}},\"operatorNote\":\"\",\"note\":\"Auto test api\",\"vehicleType\":[\"Bike\"],\"destination\":{\"businessName\":\"\",\"zipCode\":\"\",\"geo\":[108.266139,16.007381],\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"address\":\"Vinpearl Luxury Da Nang, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng\"},\"pickup\":{\"address\":\"Da Nang Software Park, Thạch Thang, Hải Châu, Đà Nẵng\",\"businessName\":\"\",\"offset\":\"+07:00\",\"timezone\":\"Asia/Saigon\",\"zipCode\":\"\",\"geo\":[108.222198,16.075792]},\"services\":[],\"typeRate\":0},\"bookingRideSharing\":[],\"dispatchRideSharing\":false,\"corporateInfo\":{\"division\":\"test\",\"managerEmail\":\"test@gmail.com\",\"corpId\":\"123\",\"managerName\":\"\",\"costCentre\":\"\",\"department\":\"\",\"corporateId\":\"5b3d86a2e4b0edd700de78d5\",\"clientCaseMatter\":\"\",\"chargeCode\":\"\"},\"psgInfo\":{\"firstName\":\"Auto Test\",\"lastName\":\"Demo 123\",\"email\":\"tester.qup@gmail.com\",\"phone\":\"+12063336666\",\"fullName\":\"Auto Test Demo 123\",\"rank\":0},\"dispatchType\":0}]"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 66,
+            "name": "I should have \"Booking\" document in database with below expected data",
+            "match": {
+              "location": "features\\step_definitions\\stepdefs.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

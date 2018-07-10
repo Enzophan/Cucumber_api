@@ -7,7 +7,7 @@ var _ = require('lodash');
 var request = require('request-promise')
 
 
-setDefaultTimeout(20000)
+setDefaultTimeout(100000);
 
 var options = {
     method: 'POST',
@@ -345,6 +345,22 @@ Then('I should get an error object in returned data with errorCode {string}', fu
 });
 
 Then('I should have {string} document in database with below info', function (collection, table) {
+    var self = this;
+    var query = JSON.parse(table.hashes()[0].specifiedInfo);
+    console.log("query :", JSON.stringify(query, null, 3));
+    return Promise.promisify(self.db.collection(collection).find, {
+        context: self.db.collection(collection)
+    })(query)
+        .then(function (foundDocs) {
+            assert.equal(foundDocs.length, table.hashes()[0].total, 'The number of documents which inserted by API is not correctly' );
+            return;
+        }).catch(function (err) {
+            console.log(err);
+            throw err;
+        });
+})
+
+Then('I should have {string} document in database with below expected data', function (collection, table) {
     var self = this;
     // [{total: 1, specifiedInfo: '{"request.note":"Auto test api"}'}]
     var specifiedInfo = JSON.parse(table.hashes()[0].specifiedInfo);
