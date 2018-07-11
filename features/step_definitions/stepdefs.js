@@ -314,8 +314,8 @@ Then('Booking create successful', function () {
         console.log("Booking successful: " + self.bookId);
     } else {
         console.log("Booking Failed");
-
-    }
+    };
+    return;
 });
 
 Then('Booking cancelled successful', function () {
@@ -326,7 +326,7 @@ Then('Booking cancelled successful', function () {
     }
     else {
         console.log("Status cancel booking failed :" + self.response)
-    }
+    };
 
     return;
 });
