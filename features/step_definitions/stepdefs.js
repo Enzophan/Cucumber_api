@@ -65,7 +65,7 @@ Given('Get token when login Account 3rd from {string}', function (server) {
 
 });
 
-Given('Get token when login account 3rd', function () {
+Given('I want get token when login account 3rd', function () {
     var self = this;
     return request(optionsLocal)
         .then(function (parsedBody) {
@@ -80,6 +80,35 @@ Given('Get token when login account 3rd', function () {
 
 });
 
+Given('I login with server {string}, user and password of Account third party based in table', function (apiUrl, dataTable) {
+    var self = this;
+    var account = dataTable.hashes()[0];
+    var requestBody = {
+        method: 'POST',
+        uri: apiUrl,
+        body: {
+            "grant_type": account.grant_type,
+            "username": account.username,
+            "password": account.password,
+            "client_id": account.client_id,
+            "client_secret": account.client_secret
+        },
+        json: true // Automatically stringifies the body to JSON
+    };
+
+    return request(requestBody)
+        .then(function (parsedBody) {
+            // console.log(parsedBody);
+            console.log("parsedBody.access_token:", parsedBody.access_token);
+            self.token = _.get(parsedBody, ["access_token"], "");
+            return;
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+});
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 When('I request booking from API', function () {
@@ -99,58 +128,58 @@ When('I request booking from API', function () {
         body: {
 
             "psgInfo":
+            {
+                "phone": "+12063336666",
+                "firstName": "Auto Test",
+                "lastName": "Demo 123",
+                "email": "tester.qup@gmail.com",
+                "creditInfo":
                 {
-                    "phone": "+12063336666",
-                    "firstName": "Auto Test",
-                    "lastName": "Demo 123",
-                    "email": "tester.qup@gmail.com",
-                    "creditInfo":
-                        {
-                            "cardNumber": "5555555555554444",
-                            "cardHolder": "Auto",
-                            "postalCode": "98789",
-                            "expiredDate": "12/2022",
-                            "cvv": "123"
+                    "cardNumber": "5555555555554444",
+                    "cardHolder": "Auto",
+                    "postalCode": "98789",
+                    "expiredDate": "12/2022",
+                    "cvv": "123"
 
-                        }
-                },
+                }
+            },
             "request":
+            {
+                "pickup":
                 {
-                    "pickup":
-                        {
-                            "address": "22 Quang Trung, H?i Châu District, Da Nang, Vietnam",
-                            "geo": [108.222367, 16.075320],
-                            "timezone": "Asia/Saigon"
-                        },
-                    "destination":
-                        {
-                            "address": "Furama Resort Da Nang, Võ Nguyên Giáp, Khuê M?, Ngu Hành Son, Ðà N?ng",
-                            "geo": [108.222583, 16.039517],
-                            "timezone": "Asia/Saigon"
-                        },
-                    "pickUpTime": "Now",
-                    "vehicleTypeRequest": "Bike",
-                    "type": 0,
-                    "paymentType": 2,
-                    "note": "Auto test api",
-                    "promo": "",
-                    "rideSharing": false,
-                    "tip": 10.99,
-                    "packageRateId": "5b3d8590e4b0edd700de78cf"
+                    "address": "22 Quang Trung, H?i Châu District, Da Nang, Vietnam",
+                    "geo": [108.222367, 16.075320],
+                    "timezone": "Asia/Saigon"
                 },
+                "destination":
+                {
+                    "address": "Furama Resort Da Nang, Võ Nguyên Giáp, Khuê M?, Ngu Hành Son, Ðà N?ng",
+                    "geo": [108.222583, 16.039517],
+                    "timezone": "Asia/Saigon"
+                },
+                "pickUpTime": "Now",
+                "vehicleTypeRequest": "Bike",
+                "type": 0,
+                "paymentType": 2,
+                "note": "Auto test api",
+                "promo": "",
+                "rideSharing": false,
+                "tip": 10.99,
+                "packageRateId": "5b3d8590e4b0edd700de78cf"
+            },
             "dispatch3rd": false,
             "corporateInfo":
-                {
-                    "division": "test",
-                    "managerEmail": "test@gmail.com",
-                    "corpId": "123",
-                    "managerName": "",
-                    "costCentre": "",
-                    "department": "",
-                    "corporateId": "5b3d86a2e4b0edd700de78d5",
-                    "clientCaseMatter": "",
-                    "chargeCode": ""
-                }
+            {
+                "division": "test",
+                "managerEmail": "test@gmail.com",
+                "corpId": "123",
+                "managerName": "",
+                "costCentre": "",
+                "department": "",
+                "corporateId": "5b3d86a2e4b0edd700de78d5",
+                "clientCaseMatter": "",
+                "chargeCode": ""
+            }
         },
         json: true // Automatically parses the JSON string in the response
     };
@@ -352,7 +381,7 @@ Then('I should have {string} document in database with below info', function (co
         context: self.db.collection(collection)
     })(query)
         .then(function (foundDocs) {
-            assert.equal(foundDocs.length, table.hashes()[0].total, 'The number of documents which inserted by API is not correctly' );
+            assert.equal(foundDocs.length, table.hashes()[0].total, 'The number of documents which inserted by API is not correctly');
             return;
         }).catch(function (err) {
             console.log(err);
@@ -370,12 +399,12 @@ Then('I should have {string} document in database with below expected data', fun
         context: self.db.collection(collection)
     })(query)
         .then(function (foundDocs) {
-            console.log("Expected Data : " + JSON.stringify(specifiedInfo));
-            console.log("Query Data : " + JSON.stringify(foundDocs));
+            console.log(">>>>>>>>>>>>Expected Data : " + JSON.stringify(specifiedInfo));
+            console.log(">>>>>>>>>>>>Query Data : " + JSON.stringify(foundDocs));
             assert.isTrue(self.matchData(foundDocs, specifiedInfo), "Failed: The data of document which inserted by API is not correctly");
             return;
         }).catch(function (err) {
-            console.log(err);
+            // console.log(err);
             throw err;
         });
 });

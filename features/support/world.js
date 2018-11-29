@@ -3,7 +3,7 @@ var mongojs = require('mongojs');
 var _ = require('lodash');
 // var config_data = require('./config-data.json');
 
-var connectionString = "mongodb://192.168.2.85:27017/qupworldCopy";
+var connectionString = "mongodb://192.168.2.85:27017/qupworld_beta";
 
 function CustomWorld() {
     this.db = mongojs(connectionString)

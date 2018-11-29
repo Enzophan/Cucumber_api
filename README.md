@@ -11,7 +11,7 @@ node node_modules/cucumber/bin/cucumber.js features/booking_create_traveler_by_a
 
 # Cancel books
 
-node node_modules/cucumber/bin/cucumber.js features/work_clear_data.feature
+node node_modules/cucumber/bin/cucumber.js features/test_batch_cancel.feature
 
 # Report HTML
 
