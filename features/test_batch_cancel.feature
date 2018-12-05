@@ -19,10 +19,10 @@ Feature: Cancel Booking from API
         And I request cancel books from API
         Then Booking cancelled successful
 
-# Scenario: 3. Request cancel Booking from API
-#     Given Get token when login Account 3rd from "local"
-#     When Find booking from "Booking" have phone number and request cancel that booking
-#         | req                                                                                        |
-#         | {"fleetId":"hoanglocal" ,"psgInfo.phone": "+12063335555", "request.note": "Auto test api"} |
-#     And I request cancel books from API
-#     Then Booking cancelled successful
+    Scenario: 3. Request cancel Booking from API
+        Given Get token when login Account 3rd from "local"
+        When Find booking from "Booking" have phone number and request cancel that booking
+            | req                                                                                        |
+            | {"fleetId":"hoanglocal" ,"psgInfo.phone": "+12063335555", "request.note": "Auto test api"} |
+        And I request cancel books from API
+        Then Booking cancelled successful
