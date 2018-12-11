@@ -148,6 +148,25 @@ When('I request API of Pegasus {string} with request with params based on table 
         });
   });
 
+  
+When('I send request to get my account info {string}', function (actionId) {
+    var self = this;
+    var socket = self.connectSocket;
+
+    return new Promise(function (onResolved, onRejected) {
+        socket.on(actionId, function (data) {
+            self.storage = self.storage || {};
+            self.storage.returnData = data;
+            onResolved();
+        })
+        socket.on("register", function (data) {
+            // self.storage.loginedInfo = data.info;
+            socket.emit(actionId);
+
+        })
+    })
+});
+
 Then('I get return info with passenger info', function (dataTable) {
     var self = this;
     var res = JSON.parse(dataTable.hashes()[0].res);

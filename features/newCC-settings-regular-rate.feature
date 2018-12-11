@@ -13,3 +13,14 @@ Feature: New CC Update Setting/ Regular Rate
             | {"_id":"580ee47ce4b0da4da78e02ed","fleetId":"tappcar", "name":"Regular Rate", "isActive":true} |
 
 
+    Scenario: 02. I get data Setting/ Add New Regular Rate
+        Given Get token when login Account NewCC from "Lab"
+            | user     | password   |
+            | tappcar1 | demo@12345 |
+        When I send request to api "https://ccliteapis.lab.qup.vn/api/rate/regular/add" with request with params based on table below
+            | requestBody                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+            | {"fleetId":"tappcar","name":"Auto Rate for SUV","firstDistanceFrom":"1","firstDistanceTo":5,"secondDistanceFrom":5,"secondDistanceTo":11,"feeTimeOver":0.5,"isDefault":false,"timeOver":0,"feesByCurrencies":[{"currencyISO":"CAD","feeAfterSecondDistance":9.9,"feeFirstDistance":15,"feePerMinute":0.5,"feeSecondDistance":12,"minNow":30,"minReservation":40,"startingNow":19,"startingReservation":25}],"isActive":true,"noShow":{"isActive":false,"valueByCurrencies":[{"value":"70","currencyISO":"CAD"}]},"cancellationPolicy":{"inAdvance":{"isActive":true,"valueByCurrencies":[{"value":"60","currencyISO":"CAD"}]},"onDemand":{"isActive":true,"valueByCurrencies":[{"value":"50","currencyISO":"CAD"}]}},"vehicleTypeId":"59c479b1e4b0518be685704e"} |
+        Then I should get the return data matches with
+            | res                                                                |
+            | {"fleetId":"tappcar", "name":"Auto Rate for SUV", "isActive":true} |
+
