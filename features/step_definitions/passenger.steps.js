@@ -146,9 +146,9 @@ When('I request API of Pegasus {string} with request with params based on table 
             self.errorResponse = err;
 
         });
-  });
+});
 
-  
+
 When('I send request to get my account info {string}', function (actionId) {
     var self = this;
     var socket = self.connectSocket;
@@ -162,8 +162,29 @@ When('I send request to get my account info {string}', function (actionId) {
         socket.on("register", function (data) {
             // self.storage.loginedInfo = data.info;
             socket.emit(actionId);
-
         })
+    })
+});
+
+
+When('I send a request to estimate fare with params based on table below', function (dataTable) {
+    var data = dataTable.hashes()[0];
+    var self = this;
+    var socket = self.connectSocket;
+    var params = JSON.parse(data.requestBody);
+    console.log("params: " + JSON.stringify(params));
+    return new Promise(function (onResolved, onRejected) {
+        socket.on('eta', function (data) {
+            self.storage = self.storage || {};
+            self.storage.returnData = data;
+            onResolved();
+        })
+        socket.on('register', function (data) {
+            self.loginedInfo = data;
+            console.log("self.loginedInfo: " + JSON.stringify(self.loginedInfo));
+            socket.emit('eta', params);
+        })
+
     })
 });
 
@@ -196,4 +217,4 @@ Then('I get return result after request API of Pegasus app', function (dataTable
     console.log(">>>>>>>>>>>>  self.result :", JSON.stringify(result));
 
     assert.isTrue(self.matchData(result, res), "Failed: The data of document which inserted by API is not correctly");
-  });
+});
