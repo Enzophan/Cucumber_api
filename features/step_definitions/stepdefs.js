@@ -221,8 +221,9 @@ When('I request booking from API when custom data', function (table) {
 
     return request(booking)
         .then(function (response) {
-            console.log("Response After request :" + response);
+            console.log("Response After request :" + JSON.stringify(response));
             console.log("Booking ID After request :" + response.response.bookId);
+            self.returnData = response;
             self.code = response.response.code;
             self.bookId = response.response.bookId;
             console.log(self.code)
@@ -346,6 +347,17 @@ Then('Booking create successful', function () {
     };
     return;
 });
+
+
+Then('I get return after request', function (dataTable) {
+    var self = this;
+    var res = JSON.parse(dataTable.hashes()[0].res);
+    console.log("expectedData :", JSON.stringify(res));
+    console.log("self.returnData :", JSON.stringify(self.returnData));
+    assert.isTrue(self.matchData(self.returnData, res), "Failed: The data of document which inserted by API is not correctly");
+
+});
+
 
 Then('Booking cancelled successful', function () {
     // Write code here that turns the phrase above into concrete actions
